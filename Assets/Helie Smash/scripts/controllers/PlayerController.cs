@@ -353,6 +353,7 @@ public class PlayerController : MonoBehaviour
     {
         isImmortal = true;
         fireEffect.gameObject.SetActive(true);
+        trailEffect.SetActive(false);
         fireEffect.Play();
         float timeTemp = immortalModeTime;
         while (timeTemp > 0)
