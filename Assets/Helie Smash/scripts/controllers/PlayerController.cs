@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float minScale = 0.85f;
     [SerializeField] private float maxScale = 1.25f;
     [SerializeField] private float scalingFactor = 2;
-    [SerializeField] private float timeCountToEnableImmortalMode = 0.3f;
+    [SerializeField] private float timeCountToEnableImmortalMode = 0.25f;
     [SerializeField] private float immortalModeTime = 3f;
 
     [Header("Player References")]
@@ -58,7 +58,8 @@ public class PlayerController : MonoBehaviour
     private bool isPaused = false;
     private bool isTouchingScreen = false;
     private bool isImmortal = false;
-
+    int count = 0;
+    public int Count { get => count; set => count = value; }
     private void OnEnable()
     {
         IngameManager.GameStateChanged += GameManager_GameStateChanged;
@@ -146,7 +147,7 @@ public class PlayerController : MonoBehaviour
             transform.localScale = scale;
 
 
-            
+
             if (closestYAxis == -1)
             {
                 closestYAxis = IngameManager.Instance.GetTopYAxisOfClosestPlatform(out closestStackControl);
@@ -169,6 +170,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     TargetY = closestYAxis;
+                    
 
                     if (isImmortal) //Đang ở chế độ bất tử
                     {
@@ -187,6 +189,7 @@ public class PlayerController : MonoBehaviour
                             ServicesManager.Instance.SoundManager.PlayOneSound(ServicesManager.Instance.SoundManager.immortalBreakStack);
                             StackPartController closestStackPart = closestStackControl.GetClosestStackPartController();
                             closestStackControl.ShatterAllParts();
+                            Count = 0;
 
                             //Create effect
                             EffectManager.Instance.CreateFadingStackEffect(closestStackPart.transform.position);
@@ -213,8 +216,16 @@ public class PlayerController : MonoBehaviour
                             StackPartController closestStackPart = closestStackControl.GetClosestStackPartController();
                             if (closestStackPart.IsDeadlyPart)
                             {
+                                Count++;
+                                if (Count == 1)
+                                {
+                                    currentJumpVelocity = 15f;
+                                }
+                                if (Count == 2)
+                                {
+                                    Player_Died();
+                                }
                                 lastSavedYPos = closestYAxis;
-                                Player_Died();
                             }
                             else
                             {
@@ -227,6 +238,7 @@ public class PlayerController : MonoBehaviour
 
                                 ServicesManager.Instance.SoundManager.PlayOneSound(ServicesManager.Instance.SoundManager.normalBreakStack);
                                 closestStackControl.ShatterAllParts();
+                                Count = 0;
                             }
                             closestYAxis = -1;
                             closestStackControl = null;
@@ -265,7 +277,6 @@ public class PlayerController : MonoBehaviour
 
         ViewManager.Instance.IngameViewController.PlayingViewControl.UpdateImmortalModeTimeView(currentTimeCount, timeCountToEnableImmortalMode);
     }
-
     private void Player_Living()
     {
         //Fire event
@@ -290,10 +301,10 @@ public class PlayerController : MonoBehaviour
 
     private void Player_Died()
     {
-        //Fire event
+    
+         //Fire event
         PlayerState = PlayerState.Player_Died;
         playerState = PlayerState.Player_Died;
-
         //Other actions
         ServicesManager.Instance.SoundManager.PlayOneSound(ServicesManager.Instance.SoundManager.playerDied);
         isTouchingScreen = false;
@@ -303,15 +314,16 @@ public class PlayerController : MonoBehaviour
         trailEffect.SetActive(false);
         currentTimeCount = 0;
         StartCoroutine(CRHandleState_Player_Dead());
+     
     }
 
 
-    private void Player_CompletedLevel()
-    {
+        private void Player_CompletedLevel()
+        {
         //Fire event
         PlayerState = PlayerState.Player_CompletedLevel;
         playerState = PlayerState.Player_CompletedLevel;
-    }
+        }
 
     /// <summary>
     /// Wait a delay time and call Ingame states.

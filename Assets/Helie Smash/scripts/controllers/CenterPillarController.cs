@@ -19,7 +19,8 @@ public class CenterPillarController : MonoBehaviour
         while (true)
         {
             turn *= -1;
-            rotateDir = (turn < 0) ? Vector3.down : Vector3.up;
+            //rotateDir = (turn < 0) ? Vector3.down : Vector3.up;
+            rotateDir = Vector3.down;
             timeTemp = Random.Range(centerPillarData.MinRotatingTime, centerPillarData.MaxRotatingTime);
             rotatingSpeed = Random.Range(centerPillarData.MinRotatingSpeed, centerPillarData.MaxRotatingSpeed);
             while (timeTemp > 0)
