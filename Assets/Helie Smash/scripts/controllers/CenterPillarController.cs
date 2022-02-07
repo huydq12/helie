@@ -4,7 +4,7 @@ using CBGames;
 
 public class CenterPillarController : MonoBehaviour
 {
-    private int turn = 1;
+    /*private int turn = 1;
     public void OnSetup(CenterPillarData centerPillarData)
     {
         turn *= (Random.value <= 0.5f) ? 1 : -1;
@@ -30,5 +30,10 @@ public class CenterPillarController : MonoBehaviour
                 transform.eulerAngles += rotateDir * rotatingSpeed * Time.deltaTime;
             }
         }
+    }*/
+
+    void Update()
+    {
+        transform.eulerAngles += Vector3.up * 70f * Time.deltaTime;
     }
 }

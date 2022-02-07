@@ -159,7 +159,7 @@ public class IngameManager : MonoBehaviour
                 centerPillarData.SetMaxRotatingSpeed(o.MaxCenterPillarRotatingSpeed);
                 centerPillarData.SetMinRotatingTime(o.MinCenterPillarRotatingTime);
                 centerPillarData.SetMaxRotatingTime(o.MaxCenterPillarRotatingTime);
-                centerPillarControl.OnSetup(centerPillarData);
+                //centerPillarControl.OnSetup(centerPillarData);
 
                 break;
             }
