@@ -136,17 +136,7 @@ public class PlayerController : MonoBehaviour
 
         if (currentJumpVelocity < 0)
         {
-            //Fix scale
-            Vector3 scale = transform.localScale;
-            if (scale.x > minScale)
-            {
-                scale.x -= scalingFactor * Time.deltaTime;
-            }
-            else
-                scale.x = minScale;
-            transform.localScale = scale;
-
-
+            FixScaleMin();
 
             if (closestYAxis == -1)
             {
@@ -251,16 +241,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            //fix scale
-            Vector3 scale = transform.localScale;
-            if (scale.x < maxScale)
-            {
-                scale.x += scalingFactor * Time.deltaTime;
-            }
-            else
-                scale.x = maxScale;
-            transform.localScale = scale;
-
+            FixScaleMax();
         }
 
 
@@ -386,6 +367,32 @@ public class PlayerController : MonoBehaviour
     {
         playerMaterial.color = color;
     }
+
+    public void FixScaleMin()
+    {
+        //Fix scale
+        Vector3 scale = transform.localScale;
+        if (scale.x > minScale)
+        {
+            scale.x -= scalingFactor * Time.deltaTime;
+        }
+        else
+            scale.x = minScale;
+        transform.localScale = scale;
+    }
+
+    public void FixScaleMax()
+    {
+        //fix scale
+        Vector3 scale = transform.localScale;
+        if (scale.x < maxScale)
+        {
+            scale.x += scalingFactor * Time.deltaTime;
+        }
+        else
+            scale.x = maxScale;
+        transform.localScale = scale;
+    }    
 
 
 }
