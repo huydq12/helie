@@ -50,7 +50,7 @@ public class PlayingViewController : MonoBehaviour {
             immortalModeTimeCountView.SetActive(true);
         }
         else if (currentTimeCount <= 0 && immortalModeTimeCountView.activeInHierarchy)
-        {
+        { 
             immortalModeTimeCountView.SetActive(false);
         }
 
@@ -58,7 +58,7 @@ public class PlayingViewController : MonoBehaviour {
 
         if (immortalModeTimeSlider.fillAmount == 1f)
         {
-            immortalModeTimeSlider.color = Color.magenta;
+            immortalModeTimeSlider.color = Color.red;
             isCountingImmortalMode = true;
             StartCoroutine(CRCountingImmortalMode());
         }
