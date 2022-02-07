@@ -19873,7 +19873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5ed7cf7a6dc1c459cdde98ebf890f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testingLevel: 1
+  testingLevel: 15
   reviveWaitTime: 5
   stackXPosition: 0
   stackZPosition: 4

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using CBGames;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
@@ -50,7 +51,6 @@ public class PlayerController : MonoBehaviour
 
 
     private StackController closestStackControl = null;
-    private Vector3 originalScale = Vector3.zero;
     private float lastSavedYPos = 0;
     private float currentJumpVelocity = 0;
     private float closestYAxis = -1;
@@ -220,11 +220,13 @@ public class PlayerController : MonoBehaviour
                                 if (Count == 1)
                                 {
                                     currentJumpVelocity = 15f;
+                                    closestStackControl.transform.DOShakeScale(0.1f, new Vector3(0.4f, 0, 0.4f), 0, 0f, false);
                                 }
                                 if (Count == 2)
                                 {
                                     Player_Died();
                                 }
+                        
                                 lastSavedYPos = closestYAxis;
                             }
                             else
@@ -276,6 +278,8 @@ public class PlayerController : MonoBehaviour
         }
 
         ViewManager.Instance.IngameViewController.PlayingViewControl.UpdateImmortalModeTimeView(currentTimeCount, timeCountToEnableImmortalMode);
+        
+
     }
     private void Player_Living()
     {
