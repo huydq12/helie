@@ -20175,7 +20175,7 @@ MonoBehaviour:
       stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
       firstStackAngle: 20
       rotationChangeAmount: 35
-      listIndexOfDeadlyPart: 0000000001000000020000000300000004000000050000000600000007000000
+      listIndexOfDeadlyPart: 00000000010000000200000003000000040000000500000006000000
     - minStackNumber: 2
       maxStackNumber: 5
       stackType: 6
@@ -20189,7 +20189,7 @@ MonoBehaviour:
       stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
       firstStackAngle: 20
       rotationChangeAmount: 70
-      listIndexOfDeadlyPart: 0000000001000000020000000300000004000000050000000600000007000000
+      listIndexOfDeadlyPart: 00000000010000000200000003000000040000000500000006000000
     - minStackNumber: 2
       maxStackNumber: 5
       stackType: 6
@@ -20203,7 +20203,7 @@ MonoBehaviour:
       stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
       firstStackAngle: 35
       rotationChangeAmount: 145
-      listIndexOfDeadlyPart: 0000000001000000020000000300000004000000050000000600000007000000
+      listIndexOfDeadlyPart: 00000000010000000200000003000000040000000600000007000000
     - minStackNumber: 2
       maxStackNumber: 5
       stackType: 6
