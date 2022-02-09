@@ -19874,7 +19874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5ed7cf7a6dc1c459cdde98ebf890f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testingLevel: 6
+  testingLevel: 1
   reviveWaitTime: 5
   stackXPosition: 0
   stackZPosition: 4
@@ -19882,7 +19882,7 @@ MonoBehaviour:
   stackSpace: 2
   listLevelConfig:
   - minLevel: 1
-    maxLevel: 1
+    maxLevel: 2
     playerColor: {r: 0.3263174, g: 0.5943396, b: 0, a: 1}
     deadlyPartColor: {r: 0.078431375, g: 0.078431375, b: 0.078431375, a: 1}
     backgroundTopColor: {r: 0.8333881, g: 1, b: 0, a: 1}
@@ -19927,8 +19927,8 @@ MonoBehaviour:
       firstStackAngle: 5
       rotationChangeAmount: -5
       listIndexOfDeadlyPart: 000000000200000006000000
-  - minLevel: 2
-    maxLevel: 3
+  - minLevel: 3
+    maxLevel: 4
     playerColor: {r: 0.58161604, g: 0.59607846, b: 0, a: 1}
     deadlyPartColor: {r: 0.078431375, g: 0.078431375, b: 0.078431375, a: 1}
     backgroundTopColor: {r: 0, g: 1, b: 0.7246165, a: 1}
@@ -19973,8 +19973,8 @@ MonoBehaviour:
       firstStackAngle: 45
       rotationChangeAmount: -5
       listIndexOfDeadlyPart: 000000000100000002000000040000000500000006000000
-  - minLevel: 4
-    maxLevel: 5
+  - minLevel: 5
+    maxLevel: 6
     playerColor: {r: 0.59607846, g: 0.3603149, b: 0, a: 1}
     deadlyPartColor: {r: 0.078431375, g: 0.078431375, b: 0.078431375, a: 1}
     backgroundTopColor: {r: 0.5042629, g: 0, b: 1, a: 1}
@@ -20019,8 +20019,8 @@ MonoBehaviour:
       firstStackAngle: 5
       rotationChangeAmount: -5
       listIndexOfDeadlyPart: 0500000001000000020000000300000004000000
-  - minLevel: 6
-    maxLevel: 7
+  - minLevel: 7
+    maxLevel: 8
     playerColor: {r: 0, g: 0.59607846, b: 0.04570698, a: 1}
     deadlyPartColor: {r: 0.078431375, g: 0.078431375, b: 0.078431375, a: 1}
     backgroundTopColor: {r: 1, g: 0, b: 0.9071803, a: 1}

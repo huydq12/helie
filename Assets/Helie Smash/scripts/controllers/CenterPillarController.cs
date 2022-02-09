@@ -34,6 +34,6 @@ public class CenterPillarController : MonoBehaviour
 
     void Update()
     {
-        this.transform.Rotate(0, 76.2f* Time.smoothDeltaTime, 0);
+        this.transform.Rotate(0, 76.12f* Time.smoothDeltaTime, 0);
     }
 }
