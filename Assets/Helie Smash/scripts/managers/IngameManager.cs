@@ -321,7 +321,11 @@ public class IngameManager : MonoBehaviour
         List<int> listTemp = new List<int>();
         while (listTemp.Count < listStackConfig.Count)
         {
-            int index = Random.Range(0, listStackConfig.Count);
+            Debug.Log(listStackConfig.Count);
+            Debug.Log("Temp"+listTemp.Count);
+            Debug.Log("index"+listTemp.Count);
+            //int index = listStackConfig.Count;
+            for (int index = 0 ; index < listStackConfig.Count ; index++ )
             if (!listTemp.Contains(index))
             {
                 listTemp.Add(index);
@@ -332,7 +336,7 @@ public class IngameManager : MonoBehaviour
         {
             StackConfig stackConfig = listStackConfig[listTemp[i]];
             StackData stackData = new StackData();
-            stackData.SetStackNumber(Random.Range(stackConfig.MinStackNumber, stackConfig.MaxStackNumber));
+            stackData.SetStackNumber(Random.Range(stackConfig.MaxStackNumber, stackConfig.MaxStackNumber));
             stackData.SetStackType(stackConfig.StackType);
             stackData.SetStackColor(stackConfig.StackColor);
             stackData.SetListIndexOfDeadlyPart(stackConfig.ListIndexOfDeadlyPart);

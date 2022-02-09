@@ -19833,7 +19833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpUpVelocity: 15
-  fallDownVelocity: -50
+  fallDownVelocity: -58
   minScale: 0.85
   maxScale: 1.25
   scalingFactor: 2
@@ -19844,6 +19844,7 @@ MonoBehaviour:
   trailEffect: {fileID: 364505064}
   explodeEffect: {fileID: 1091892210}
   fireEffect: {fileID: 1482887448}
+  currentJumpVelocity: 0
 --- !u!1 &1815334774
 GameObject:
   m_ObjectHideFlags: 0
@@ -19873,7 +19874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5ed7cf7a6dc1c459cdde98ebf890f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testingLevel: 15
+  testingLevel: 6
   reviveWaitTime: 5
   stackXPosition: 0
   stackZPosition: 4
@@ -19881,78 +19882,99 @@ MonoBehaviour:
   stackSpace: 2
   listLevelConfig:
   - minLevel: 1
-    maxLevel: 5
+    maxLevel: 1
     playerColor: {r: 0.3263174, g: 0.5943396, b: 0, a: 1}
     deadlyPartColor: {r: 0.078431375, g: 0.078431375, b: 0.078431375, a: 1}
     backgroundTopColor: {r: 0.8333881, g: 1, b: 0, a: 1}
     backgroundBottomColor: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
-    minCenterPillarRotatingSpeed: 50
-    maxCenterPillarRotatingSpeed: 80
-    minCenterPillarRotatingTime: 3
-    maxCenterPillarRotatingTime: 7
+    minCenterPillarRotatingSpeed: 0
+    maxCenterPillarRotatingSpeed: 0
+    minCenterPillarRotatingTime: 0
+    maxCenterPillarRotatingTime: 0
     listStackConfig:
-    - minStackNumber: 20
-      maxStackNumber: 25
-      stackType: 5
-      stackColor: {r: 0, g: 0.5086136, b: 0.5849056, a: 1}
-      firstStackAngle: 10
-      rotationChangeAmount: 5
-      listIndexOfDeadlyPart: 0000000001000000
-    - minStackNumber: 5
+    - minStackNumber: 10
       maxStackNumber: 10
-      stackType: 5
-      stackColor: {r: 0, g: 0.50980395, b: 0.58431375, a: 1}
-      firstStackAngle: 20
-      rotationChangeAmount: 5
+      stackType: 35
+      stackColor: {r: 0.063189745, g: 0.10010204, b: 0.18867922, a: 1}
+      firstStackAngle: 205
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 0000000001000000
+    - minStackNumber: 8
+      maxStackNumber: 8
+      stackType: 35
+      stackColor: {r: 0.0627451, g: 0.10196079, b: 0.18823531, a: 1}
+      firstStackAngle: 155
+      rotationChangeAmount: -5
       listIndexOfDeadlyPart: 00000000010000000200000003000000
-    - minStackNumber: 20
-      maxStackNumber: 30
-      stackType: 5
-      stackColor: {r: 0, g: 0.5019608, b: 0.5764706, a: 1}
-      firstStackAngle: 45
-      rotationChangeAmount: 6
+    - minStackNumber: 10
+      maxStackNumber: 10
+      stackType: 35
+      stackColor: {r: 0.0627451, g: 0.10196079, b: 0.18823531, a: 1}
+      firstStackAngle: 115
+      rotationChangeAmount: -5
       listIndexOfDeadlyPart: 000000000200000006000000
-  - minLevel: 5
-    maxLevel: 10
+    - minStackNumber: 12
+      maxStackNumber: 12
+      stackType: 5
+      stackColor: {r: 0.0627451, g: 0.10196079, b: 0.18823531, a: 1}
+      firstStackAngle: 65
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 000000000200000006000000
+    - minStackNumber: 10
+      maxStackNumber: 10
+      stackType: 35
+      stackColor: {r: 0.0627451, g: 0.10196079, b: 0.18823531, a: 1}
+      firstStackAngle: 5
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 000000000200000006000000
+  - minLevel: 2
+    maxLevel: 3
     playerColor: {r: 0.58161604, g: 0.59607846, b: 0, a: 1}
     deadlyPartColor: {r: 0.078431375, g: 0.078431375, b: 0.078431375, a: 1}
     backgroundTopColor: {r: 0, g: 1, b: 0.7246165, a: 1}
     backgroundBottomColor: {r: 1, g: 0.62038237, b: 0.48584908, a: 1}
-    minCenterPillarRotatingSpeed: 50
-    maxCenterPillarRotatingSpeed: 80
-    minCenterPillarRotatingTime: 4
-    maxCenterPillarRotatingTime: 8
+    minCenterPillarRotatingSpeed: 0
+    maxCenterPillarRotatingSpeed: 0
+    minCenterPillarRotatingTime: 0
+    maxCenterPillarRotatingTime: 0
     listStackConfig:
-    - minStackNumber: 30
-      maxStackNumber: 35
+    - minStackNumber: 10
+      maxStackNumber: 10
       stackType: 26
       stackColor: {r: 0.58431375, g: 0.36957607, b: 0, a: 1}
-      firstStackAngle: 15
-      rotationChangeAmount: 5
-      listIndexOfDeadlyPart: 000000000100000004000000
-    - minStackNumber: 5
+      firstStackAngle: 205
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 00000000010000000400000002000000
+    - minStackNumber: 8
+      maxStackNumber: 8
+      stackType: 26
+      stackColor: {r: 0.58431375, g: 0.36862746, b: 0, a: 1}
+      firstStackAngle: 155
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 000000000100000002000000030000000400000006000000070000000800000009000000
+    - minStackNumber: 10
       maxStackNumber: 10
       stackType: 26
       stackColor: {r: 0.58431375, g: 0.36862746, b: 0, a: 1}
-      firstStackAngle: 25
+      firstStackAngle: 45
       rotationChangeAmount: -5
-      listIndexOfDeadlyPart: 00000000010000000200000003000000
-    - minStackNumber: 25
-      maxStackNumber: 30
+      listIndexOfDeadlyPart: 00000000020000000600000007000000
+    - minStackNumber: 12
+      maxStackNumber: 12
       stackType: 26
       stackColor: {r: 0.58431375, g: 0.36862746, b: 0, a: 1}
       firstStackAngle: 45
-      rotationChangeAmount: 6
-      listIndexOfDeadlyPart: 000000000200000006000000
-    - minStackNumber: 7
-      maxStackNumber: 14
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 000000000100000002000000040000000600000007000000
+    - minStackNumber: 10
+      maxStackNumber: 10
       stackType: 26
       stackColor: {r: 0.58431375, g: 0.36862746, b: 0, a: 1}
       firstStackAngle: 45
-      rotationChangeAmount: -6
-      listIndexOfDeadlyPart: 00000000010000000200000004000000
-  - minLevel: 10
-    maxLevel: 15
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 000000000100000002000000040000000500000006000000
+  - minLevel: 4
+    maxLevel: 5
     playerColor: {r: 0.59607846, g: 0.3603149, b: 0, a: 1}
     deadlyPartColor: {r: 0.078431375, g: 0.078431375, b: 0.078431375, a: 1}
     backgroundTopColor: {r: 0.5042629, g: 0, b: 1, a: 1}
@@ -19962,262 +19984,185 @@ MonoBehaviour:
     minCenterPillarRotatingTime: 5
     maxCenterPillarRotatingTime: 10
     listStackConfig:
-    - minStackNumber: 30
-      maxStackNumber: 35
+    - minStackNumber: 10
+      maxStackNumber: 10
       stackType: 17
       stackColor: {r: 0.5647059, g: 0, b: 0.44705886, a: 1}
-      firstStackAngle: 30
-      rotationChangeAmount: 4
+      firstStackAngle: 205
+      rotationChangeAmount: -5
       listIndexOfDeadlyPart: 000000000200000004000000
-    - minStackNumber: 6
-      maxStackNumber: 12
+    - minStackNumber: 8
+      maxStackNumber: 8
       stackType: 17
       stackColor: {r: 0.5647059, g: 0, b: 0.44727767, a: 1}
-      firstStackAngle: 15
-      rotationChangeAmount: 5
+      firstStackAngle: 155
+      rotationChangeAmount: -5
       listIndexOfDeadlyPart: 0000000002000000030000000500000007000000
-    - minStackNumber: 25
-      maxStackNumber: 30
+    - minStackNumber: 10
+      maxStackNumber: 10
       stackType: 17
       stackColor: {r: 0.5647059, g: 0, b: 0.44705886, a: 1}
-      firstStackAngle: 35
+      firstStackAngle: 115
       rotationChangeAmount: -6
-      listIndexOfDeadlyPart: 000000000200000005000000
-    - minStackNumber: 15
-      maxStackNumber: 25
+      listIndexOfDeadlyPart: 0000000001000000020000000300000005000000
+    - minStackNumber: 12
+      maxStackNumber: 12
       stackType: 17
       stackColor: {r: 0.5647059, g: 0, b: 0.44705886, a: 1}
-      firstStackAngle: 45
+      firstStackAngle: 65
       rotationChangeAmount: -5
       listIndexOfDeadlyPart: 00000000010000000200000004000000
-  - minLevel: 15
-    maxLevel: 20
+    - minStackNumber: 10
+      maxStackNumber: 10
+      stackType: 17
+      stackColor: {r: 0.5647059, g: 0, b: 0.44705886, a: 1}
+      firstStackAngle: 5
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 0500000001000000020000000300000004000000
+  - minLevel: 6
+    maxLevel: 7
     playerColor: {r: 0, g: 0.59607846, b: 0.04570698, a: 1}
     deadlyPartColor: {r: 0.078431375, g: 0.078431375, b: 0.078431375, a: 1}
     backgroundTopColor: {r: 1, g: 0, b: 0.9071803, a: 1}
     backgroundBottomColor: {r: 0.70943564, g: 0.48627448, b: 1, a: 1}
-    minCenterPillarRotatingSpeed: 50
-    maxCenterPillarRotatingSpeed: 90
-    minCenterPillarRotatingTime: 3
-    maxCenterPillarRotatingTime: 6
+    minCenterPillarRotatingSpeed: 0
+    maxCenterPillarRotatingSpeed: 0
+    minCenterPillarRotatingTime: 0
+    maxCenterPillarRotatingTime: 0
     listStackConfig:
     - minStackNumber: 2
-      maxStackNumber: 5
+      maxStackNumber: 2
       stackType: 6
       stackColor: {r: 0.53284186, g: 0.6037736, b: 0, a: 1}
-      firstStackAngle: 50
-      rotationChangeAmount: 4
-      listIndexOfDeadlyPart: 00000000020000000300000004000000050000000600000007000000
+      firstStackAngle: 305
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 00000000010000000200000003000000040000000700000006000000
     - minStackNumber: 2
-      maxStackNumber: 5
+      maxStackNumber: 2
       stackType: 6
       stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 80
-      rotationChangeAmount: -7
-      listIndexOfDeadlyPart: 00000000010000000400000005000000080000000900000003000000
-    - minStackNumber: 2
-      maxStackNumber: 5
+      firstStackAngle: 295
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 00000000010000000200000003000000040000000700000006000000
+    - minStackNumber: 4
+      maxStackNumber: 4
       stackType: 6
       stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 100
-      rotationChangeAmount: 5
-      listIndexOfDeadlyPart: 020000000300000005000000060000000700000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
+      firstStackAngle: 285
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 00000000070000000200000003000000040000000500000006000000
+    - minStackNumber: 3
+      maxStackNumber: 3
       stackType: 6
       stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 120
-      rotationChangeAmount: 5
-      listIndexOfDeadlyPart: 020000000300000005000000060000000700000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
+      firstStackAngle: 265
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 00000000010000000200000003000000040000000700000006000000
+    - minStackNumber: 4
+      maxStackNumber: 4
       stackType: 6
       stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 180
-      rotationChangeAmount: 5
-      listIndexOfDeadlyPart: 020000000300000005000000060000000700000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
+      firstStackAngle: 250
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 00000000010000000200000003000000040000000500000007000000
+    - minStackNumber: 1
+      maxStackNumber: 1
       stackType: 6
       stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 50
-      rotationChangeAmount: 15
-      listIndexOfDeadlyPart: 020000000300000005000000060000000700000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
+      firstStackAngle: 230
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 00000000010000000200000003000000070000000500000006000000
+    - minStackNumber: 1
+      maxStackNumber: 1
       stackType: 6
       stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 120
-      rotationChangeAmount: 7
-      listIndexOfDeadlyPart: 020000000300000005000000060000000700000000000000
+      firstStackAngle: 225
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 00000000010000000200000007000000040000000500000006000000
     - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 0
-      rotationChangeAmount: 5
-      listIndexOfDeadlyPart: 020000000300000005000000060000000700000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 115
-      rotationChangeAmount: 15
-      listIndexOfDeadlyPart: 020000000300000005000000060000000700000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 30
-      rotationChangeAmount: 20
-      listIndexOfDeadlyPart: 020000000300000005000000060000000700000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 300
-      rotationChangeAmount: 12
-      listIndexOfDeadlyPart: 020000000300000005000000060000000700000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 280
-      rotationChangeAmount: 25
-      listIndexOfDeadlyPart: 020000000300000005000000060000000700000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 120
-      rotationChangeAmount: 5
-      listIndexOfDeadlyPart: 02000000030000000500000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 150
-      rotationChangeAmount: 125
-      listIndexOfDeadlyPart: 0200000005000000060000000700000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 30
-      rotationChangeAmount: 25
-      listIndexOfDeadlyPart: 0200000003000000060000000700000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 80
-      rotationChangeAmount: 15
-      listIndexOfDeadlyPart: 020000000300000005000000060000000700000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 156
-      rotationChangeAmount: 12
-      listIndexOfDeadlyPart: 020000000300000005000000060000000700000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 20
-      rotationChangeAmount: 25
-      listIndexOfDeadlyPart: 02000000030000000700000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 120
-      rotationChangeAmount: 5
-      listIndexOfDeadlyPart: 02000000030000000700000000000000
-    - minStackNumber: 2
-      maxStackNumber: 5
+      maxStackNumber: 2
       stackType: 6
       stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
       firstStackAngle: 220
-      rotationChangeAmount: 25
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 00000000070000000200000003000000040000000500000006000000
+    - minStackNumber: 3
+      maxStackNumber: 3
+      stackType: 6
+      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
+      firstStackAngle: 210
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 00000000010000000200000003000000040000000500000006000000
+    - minStackNumber: 4
+      maxStackNumber: 4
+      stackType: 6
+      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
+      firstStackAngle: 195
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 00000000010000000200000007000000040000000500000006000000
+    - minStackNumber: 2
+      maxStackNumber: 2
+      stackType: 6
+      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
+      firstStackAngle: 175
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 02000000030000000100000006000000070000000000000008000000
+    - minStackNumber: 3
+      maxStackNumber: 3
+      stackType: 6
+      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
+      firstStackAngle: 165
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 02000000030000000100000006000000070000000000000008000000
+    - minStackNumber: 4
+      maxStackNumber: 4
+      stackType: 6
+      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
+      firstStackAngle: 150
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 02000000030000000500000000000000010000000800000007000000
+    - minStackNumber: 5
+      maxStackNumber: 5
+      stackType: 6
+      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
+      firstStackAngle: 130
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 02000000050000000600000007000000000000000100000003000000
+    - minStackNumber: 4
+      maxStackNumber: 4
+      stackType: 6
+      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
+      firstStackAngle: 105
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 02000000030000000600000007000000000000000100000008000000
+    - minStackNumber: 7
+      maxStackNumber: 7
+      stackType: 6
+      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
+      firstStackAngle: 85
+      rotationChangeAmount: -5
       listIndexOfDeadlyPart: 020000000300000005000000060000000700000000000000
     - minStackNumber: 2
+      maxStackNumber: 2
+      stackType: 6
+      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
+      firstStackAngle: 55
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 020000000300000005000000060000000700000000000000
+    - minStackNumber: 5
       maxStackNumber: 5
       stackType: 6
       stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 10
-      rotationChangeAmount: 135
-      listIndexOfDeadlyPart: 020000000300000005000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 10
-      rotationChangeAmount: 135
-      listIndexOfDeadlyPart: 00000000010000000200000004000000050000000600000007000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 100
-      rotationChangeAmount: 35
-      listIndexOfDeadlyPart: 00000000010000000200000003000000050000000600000007000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 10
-      rotationChangeAmount: 135
-      listIndexOfDeadlyPart: 01000000020000000300000004000000050000000600000007000000
-    - minStackNumber: 2
+      firstStackAngle: 45
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 02000000030000000700000000000000010000000500000004000000
+    - minStackNumber: 5
       maxStackNumber: 5
       stackType: 6
       stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
       firstStackAngle: 20
-      rotationChangeAmount: 35
-      listIndexOfDeadlyPart: 00000000010000000200000003000000040000000500000006000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 135
-      rotationChangeAmount: 65
-      listIndexOfDeadlyPart: 00000000010000000200000004000000050000000600000007000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 20
-      rotationChangeAmount: 70
-      listIndexOfDeadlyPart: 00000000010000000200000003000000040000000500000006000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 10
-      rotationChangeAmount: 135
-      listIndexOfDeadlyPart: 00000000020000000300000004000000050000000600000007000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 35
-      rotationChangeAmount: 145
-      listIndexOfDeadlyPart: 00000000010000000200000003000000040000000600000007000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 10
-      rotationChangeAmount: 45
-      listIndexOfDeadlyPart: 00000000010000000200000003000000040000000500000007000000
-    - minStackNumber: 2
-      maxStackNumber: 5
-      stackType: 6
-      stackColor: {r: 0.53333336, g: 0.6039216, b: 0, a: 1}
-      firstStackAngle: 10
-      rotationChangeAmount: 125
-      listIndexOfDeadlyPart: 00000000010000000200000003000000040000000500000006000000
+      rotationChangeAmount: -5
+      listIndexOfDeadlyPart: 02000000030000000700000000000000
   - minLevel: 20
     maxLevel: 25
     playerColor: {r: 0, g: 0.333345, b: 0.59607846, a: 1}

@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player Config")]
     [SerializeField] private float jumpUpVelocity = 15;
-    [SerializeField] private float fallDownVelocity = -50;
+    [SerializeField] private float fallDownVelocity ;
     [SerializeField] private float minScale = 0.85f;
     [SerializeField] private float maxScale = 1.25f;
     [SerializeField] private float scalingFactor = 2;
@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
     private StackController closestStackControl = null;
     private float lastSavedYPos = 0;
-    private float currentJumpVelocity = 0;
+    public float currentJumpVelocity = 0;
     private float closestYAxis = -1;
     private float currentTimeCount = 0;
     private bool isPaused = false;
@@ -109,154 +109,161 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-
         //Fire event
         PlayerState = PlayerState.Player_Prepare;
         playerState = PlayerState.Player_Prepare;
-
-
         isImmortal= false;
         explodeEffect.gameObject.SetActive(false);
         fireEffect.gameObject.SetActive(false);
     }
 
+    private void CreateSplashes()
+    {
+        ServicesManager.Instance.SoundManager.PlayOneSound(ServicesManager.Instance.SoundManager.jump);
+        currentJumpVelocity = jumpUpVelocity;
+        Vector3 splashesPos = new Vector3(transform.position.x, closestYAxis + 0.05f, transform.position.z);
+        EffectManager.Instance.CreateSplashesTextureEffect(splashesPos, playerMaterial.color, closestStackControl.transform);
+        EffectManager.Instance.CreateSplashesDustEffect(splashesPos);
+    }
+
     private void Update()
     {
-        if (playerState == PlayerState.Player_Died)
+
+
+        switch (playerState)
         {
-            return;
-        }
-
-        transform.position = transform.position + Vector3.up * (currentJumpVelocity * Time.deltaTime + fallDownVelocity * Time.deltaTime * Time.deltaTime / 2);
-
-        if (currentJumpVelocity < fallDownVelocity)
-            currentJumpVelocity = fallDownVelocity;
-        else
-            currentJumpVelocity = currentJumpVelocity + fallDownVelocity * Time.deltaTime;
-
-        if (currentJumpVelocity < 0)
-        {
-            FixScaleMin();
-
-            if (closestYAxis == -1)
-            {
-                closestYAxis = IngameManager.Instance.GetTopYAxisOfClosestPlatform(out closestStackControl);
-            }
-
-            //Tính khoảng cách 
-            float bottomY = (transform.position + Vector3.down * (meshRender.bounds.size.y / 2f)).y;
-            float distance = bottomY - closestYAxis;
-            if (distance <= 0.1f)
-            {
-                if (closestStackControl == null) //Kiểm ra nếu người chơi đã vượt hết stack , LV đã hoàn thành 
+            case PlayerState.Player_Living:
+                if (Input.GetMouseButton(0))
                 {
-                    currentJumpVelocity = jumpUpVelocity;
-                    if (playerState == PlayerState.Player_Living)
+                    isTouchingScreen = true;
+                    
+                }
+
+                if (Input.GetMouseButtonUp(0) && isTouchingScreen)
+                {
+                    isTouchingScreen = false;
+                }
+                break;
+
+            case PlayerState.Player_Died:
+
+                break;
+
+            
+        }
+                
+               
+                transform.position = transform.position + Vector3.up * (currentJumpVelocity * Time.smoothDeltaTime + fallDownVelocity * Time.smoothDeltaTime * Time.smoothDeltaTime / 2);
+                
+                if (currentJumpVelocity < fallDownVelocity)
+                    currentJumpVelocity = fallDownVelocity;
+                else
+                    currentJumpVelocity = currentJumpVelocity + fallDownVelocity * Time.deltaTime;
+
+                if (currentJumpVelocity <= -29f)
+                {
+                    currentJumpVelocity = -29f;
+                }
+                if (currentJumpVelocity < 0)
+                {
+                    FixScaleMin();
+
+                    if (closestYAxis == -1)
                     {
-                        Player_CompletedLevel();
-                        IngameManager.Instance.CompletedLevel();
+                        closestYAxis = IngameManager.Instance.GetTopYAxisOfClosestPlatform(out closestStackControl);
+                    }
+
+                    //Tính khoảng cách 
+                    float bottomY = (transform.position + Vector3.down * (meshRender.bounds.size.y / 2f)).y;
+                    float distance = bottomY - closestYAxis;
+                    if (distance <= 0.1f)
+                    {
+                        if (closestStackControl == null) //Kiểm ra nếu người chơi đã vượt hết stack , LV đã hoàn thành 
+                        {
+                            currentJumpVelocity = jumpUpVelocity;
+                            if (playerState == PlayerState.Player_Living)
+                            {
+                                Player_CompletedLevel();
+                                IngameManager.Instance.CompletedLevel();
+                            }
+                        }
+                        else
+                        {
+                            TargetY = closestYAxis;
+
+                            if (isImmortal) //Đang ở chế độ bất tử
+                            {
+                                if (!isTouchingScreen)
+                                {
+                                    CreateSplashes();
+                                }
+                                else
+                                {
+                                    ServicesManager.Instance.SoundManager.PlayOneSound(ServicesManager.Instance.SoundManager.immortalBreakStack);
+                                    StackPartController closestStackPart = closestStackControl.GetClosestStackPartController();
+                                    closestStackControl.ShatterAllParts();
+                                    Count = 0;
+
+                                    //Create effect
+                                    EffectManager.Instance.CreateFadingStackEffect(closestStackPart.transform.position);
+
+                                    closestYAxis = -1;
+                                    closestStackControl = null;
+                                }
+                            }
+                            else
+                            {
+                                if (!isTouchingScreen)
+                                {
+                                    currentTimeCount = Mathf.Clamp(currentTimeCount - Time.deltaTime, 0, timeCountToEnableImmortalMode);
+                                    CreateSplashes();
+                                }
+                                else
+                                {
+                                    StackPartController closestStackPart = closestStackControl.GetClosestStackPartController();
+                                    if (closestStackPart.IsDeadlyPart)
+                                    {
+                                        Count++;
+                                        if (Count == 1)
+                                        {
+                                            currentJumpVelocity = 15f;
+                                            closestStackControl.transform.DOShakeScale(0.1f, new Vector3(0.4f, 0, 0.4f), 0, 0f, false);
+                                        }
+                                        if (Count == 2)
+                                        {
+                                            Player_Died();
+                                        }
+
+                                        lastSavedYPos = closestYAxis;
+                                    }
+                                    else
+                                    {
+                                        currentTimeCount += Time.deltaTime;
+                                        if (currentTimeCount >= timeCountToEnableImmortalMode)
+                                        {
+                                            currentTimeCount = timeCountToEnableImmortalMode;
+                                            StartCoroutine(CRCountingImmortalMode());
+                                        }
+
+                                        ServicesManager.Instance.SoundManager.PlayOneSound(ServicesManager.Instance.SoundManager.normalBreakStack);
+                                        closestStackControl.ShatterAllParts();
+                                        Count = 0;
+                                    }
+                                    closestYAxis = -1;
+                                    closestStackControl = null;
+                                }
+                            }
+                        }
                     }
                 }
                 else
                 {
-                    TargetY = closestYAxis;
-                    
-
-                    if (isImmortal) //Đang ở chế độ bất tử
-                    {
-                        if (!isTouchingScreen)
-                        {
-                            ServicesManager.Instance.SoundManager.PlayOneSound(ServicesManager.Instance.SoundManager.jump);
-                            currentJumpVelocity = jumpUpVelocity;
-
-                            //Create splashes
-                            Vector3 splashesPos = new Vector3(transform.position.x, closestYAxis + 0.05f, transform.position.z);
-                            EffectManager.Instance.CreateSplashesTextureEffect(splashesPos, playerMaterial.color, closestStackControl.transform);
-                            EffectManager.Instance.CreateSplashesDustEffect(splashesPos);
-                        }
-                        else
-                        {
-                            ServicesManager.Instance.SoundManager.PlayOneSound(ServicesManager.Instance.SoundManager.immortalBreakStack);
-                            StackPartController closestStackPart = closestStackControl.GetClosestStackPartController();
-                            closestStackControl.ShatterAllParts();
-                            Count = 0;
-
-                            //Create effect
-                            EffectManager.Instance.CreateFadingStackEffect(closestStackPart.transform.position);
-
-                            closestYAxis = -1;
-                            closestStackControl = null;
-                        }
-                    }
-                    else
-                    {
-                        if (!isTouchingScreen)
-                        {
-                            ServicesManager.Instance.SoundManager.PlayOneSound(ServicesManager.Instance.SoundManager.jump);
-                            currentTimeCount = Mathf.Clamp(currentTimeCount - Time.deltaTime, 0, timeCountToEnableImmortalMode);
-                            currentJumpVelocity = jumpUpVelocity;
-
-                            //Create splashes effects
-                            Vector3 splashesPos = new Vector3(transform.position.x, closestYAxis + 0.05f, transform.position.z);
-                            EffectManager.Instance.CreateSplashesTextureEffect(splashesPos, playerMaterial.color, closestStackControl.transform);
-                            EffectManager.Instance.CreateSplashesDustEffect(splashesPos);
-                        }
-                        else
-                        {
-                            StackPartController closestStackPart = closestStackControl.GetClosestStackPartController();
-                            if (closestStackPart.IsDeadlyPart)
-                            {
-                                Count++;
-                                if (Count == 1)
-                                {
-                                    currentJumpVelocity = 15f;
-                                    closestStackControl.transform.DOShakeScale(0.1f, new Vector3(0.4f, 0, 0.4f), 0, 0f, false);
-                                }
-                                if (Count == 2)
-                                {
-                                    Player_Died();
-                                }
-                        
-                                lastSavedYPos = closestYAxis;
-                            }
-                            else
-                            {
-                                currentTimeCount += Time.deltaTime;
-                                if (currentTimeCount >= timeCountToEnableImmortalMode)
-                                {
-                                    currentTimeCount = timeCountToEnableImmortalMode;
-                                    StartCoroutine(CRCountingImmortalMode());
-                                }
-
-                                ServicesManager.Instance.SoundManager.PlayOneSound(ServicesManager.Instance.SoundManager.normalBreakStack);
-                                closestStackControl.ShatterAllParts();
-                                Count = 0;
-                            }
-                            closestYAxis = -1;
-                            closestStackControl = null;
-                        }
-                    }
+                    FixScaleMax();
                 }
-            }
-        }
-        else
-        {
-            FixScaleMax();
-        }
 
 
-        if (playerState == PlayerState.Player_Living)
-        {
-            if (Input.GetMouseButton(0))
-            {
-                isTouchingScreen = true;
-            }
 
-            if (Input.GetMouseButtonUp(0) && isTouchingScreen)
-            {
-                isTouchingScreen = false;
-            }
-        }
+
 
         ViewManager.Instance.IngameViewController.PlayingViewControl.UpdateImmortalModeTimeView(currentTimeCount, timeCountToEnableImmortalMode);
         
@@ -282,6 +289,8 @@ public class PlayerController : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, lastSavedYPos, transform.position.z);
             }
         }
+        
+        
     }
 
     private void Player_Died()

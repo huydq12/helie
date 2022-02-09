@@ -34,6 +34,6 @@ public class CenterPillarController : MonoBehaviour
 
     void Update()
     {
-        transform.eulerAngles += Vector3.up * 70f * Time.deltaTime;
+        this.transform.Rotate(0, 76.2f* Time.smoothDeltaTime, 0);
     }
 }
